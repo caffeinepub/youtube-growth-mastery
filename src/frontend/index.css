@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   FONT FACES - Self-hosted from /assets/fonts/
+   ============================================= */
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/Mona-Sans.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =============================================
+   DESIGN TOKENS - YouTube Growth Mastery
+   Bold Red + Dark Grey + White
+   ============================================= */
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Core palette — light mode (content sections) */
+    --background: 0.97 0 0;           /* near-white */
+    --foreground: 0.13 0 0;           /* near-black */
+
+    --card: 1 0 0;                    /* pure white */
+    --card-foreground: 0.13 0 0;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.13 0 0;
+
+    /* Primary = vivid red — OKLCH approximation of #E50914 */
+    --primary: 0.48 0.245 25.5;
+    --primary-foreground: 1 0 0;
+
+    /* Secondary = dark grey */
+    --secondary: 0.18 0 0;
+    --secondary-foreground: 0.97 0 0;
+
+    /* Muted */
+    --muted: 0.94 0 0;
+    --muted-foreground: 0.45 0 0;
+
+    /* Accent = slightly lighter red */
+    --accent: 0.56 0.235 25.5;
+    --accent-foreground: 1 0 0;
+
+    /* Destructive */
+    --destructive: 0.48 0.245 25.5;
+    --destructive-foreground: 1 0 0;
+
+    /* Borders & inputs */
+    --border: 0.88 0 0;
+    --input: 0.88 0 0;
+    --ring: 0.48 0.245 25.5;
+
+    /* Chart colors */
+    --chart-1: 0.48 0.245 25.5;
+    --chart-2: 0.18 0 0;
+    --chart-3: 0.65 0.175 25.5;
+    --chart-4: 0.75 0.12 55;
+    --chart-5: 0.60 0.16 200;
+
+    /* Sidebar */
+    --sidebar: 0.13 0 0;
+    --sidebar-foreground: 0.97 0 0;
+    --sidebar-primary: 0.48 0.245 25.5;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.20 0 0;
+    --sidebar-accent-foreground: 0.97 0 0;
+    --sidebar-border: 0.25 0 0;
+    --sidebar-ring: 0.48 0.245 25.5;
+
+    /* Custom tokens */
+    --dark-bg: 0.10 0 0;             /* #1A1A1A near-black */
+    --dark-surface: 0.15 0 0;        /* slightly lighter dark */
+    --red-vivid: 0.48 0.245 25.5;    /* vivid red */
+    --red-bright: 0.56 0.235 25.5;   /* brighter red for hover */
+    --red-dim: 0.40 0.22 25.5;       /* darker red */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Mona Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Cabinet Grotesk", "Mona Sans", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =============================================
+   CUSTOM UTILITY CLASSES
+   ============================================= */
+
+@layer utilities {
+  .text-shadow-red {
+    text-shadow: 0 0 40px oklch(0.48 0.245 25.5 / 0.5);
+  }
+
+  .bg-dark {
+    background-color: oklch(0.10 0 0);
+  }
+
+  .bg-dark-surface {
+    background-color: oklch(0.15 0 0);
+  }
+
+  .text-red-vivid {
+    color: oklch(0.48 0.245 25.5);
+  }
+
+  .border-red-vivid {
+    border-color: oklch(0.48 0.245 25.5);
+  }
+
+  .bg-red-vivid {
+    background-color: oklch(0.48 0.245 25.5);
+  }
+
+  .hover\:bg-red-bright:hover {
+    background-color: oklch(0.56 0.235 25.5);
+  }
+
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
